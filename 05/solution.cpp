@@ -3,7 +3,6 @@
 #include <string>
 #include <vector>
 #include <limits.h>
-#include <chrono>
 
 #if 0
     #define FILE_PATH "example.txt"
@@ -26,8 +25,7 @@ void printRange(Range range) {
 }
 
 void printRangeMap(RangeMap map) {
-    std::cout << "Range(source_start: " << map.source_start << ", dest_start: " << map.dest_start << ", range: " << map.range << ")" << std::endl;
-
+    std::cout << "RangeMap(source_start: " << map.source_start << ", dest_start: " << map.dest_start << ", range: " << map.range << ")" << std::endl;
 }
 
 void printRangeVector(std::vector<Range> list) {
@@ -137,7 +135,7 @@ std::vector<Range> getPossibleRanges(Range range, int rangeMap) {
 }
 
 int solution2() {
-    long long lowest = INT_MAX;
+    long long lowest = LLONG_MAX;
     std::vector<Range> ranges;
     std::vector<Range> swap;
     for (int i = 0; i < seeds.size(); i += 2) {
