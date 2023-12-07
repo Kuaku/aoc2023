@@ -120,32 +120,19 @@ int calcScore2(Hand hand) {
     if (highest_count == 0) {
         return 7;
     }
+    highest_count += joker;
+    counts[highest_index].count += joker;
 
     if (highest_count == 1) {
-        switch (joker) {
-            case 0: return 1;
-            case 1: return 2;
-            case 2: return 4;
-            case 3: return 6;
-            case 4: return 7;
-        }
+        return 1;
     }
 
     if (highest_count == 2) {
         for (int i = 0; i < char_size; i++) {
             if (i == highest_index) continue;
             if (counts[i].count == 2) {
-                if (joker == 1) {
-                    return 5;
-                } else {
-                    return 3;
-                }
+                return 3;
             }
-        }
-        switch (joker) {
-            case 1: return 4;
-            case 2: return 6;
-            case 3: return 7;
         }
         return 2;
     }
@@ -156,14 +143,10 @@ int calcScore2(Hand hand) {
                 return 5;
             }
         }
-        switch (joker) {
-            case 1: return 6;
-            case 2: return 7;
-        }
         return 4;
     }
 
-    return highest_count + 2 + joker;
+    return highest_count + 2;
 }
 
 int compareHands(Hand hand1, Hand hand2) {
@@ -274,9 +257,6 @@ int solution1() {
         sum += sorted_hands[i].score * (i + 1);
     }
 
-    for (int i = 0; i < size; ++i) {
-        std::cout << (i + 1) << "\t Hand(hand: " << sorted_hands[i].hand << ", score: " << sorted_hands[i].score << ")\t| " << calcScore(sorted_hands[i]) << std::endl;
-    }
     return sum;
 }
 
@@ -292,9 +272,6 @@ int solution2() {
         sum += sorted_hands[i].score * (i + 1);
     }
 
-    for (int i = 0; i < size; ++i) {
-        std::cout << (i + 1) << "\t Hand(hand: " << sorted_hands[i].hand << ", score: " << sorted_hands[i].score << ")\t| " << calcScore2(sorted_hands[i]) << std::endl;
-    }
     return sum;
 }
 
@@ -319,10 +296,10 @@ int main() {
     }
     file.close();
 
-    for (int i = 0; i < size; ++i) {
+    /*for (int i = 0; i < size; ++i) {
         std::cout << "Hand(hand: " << hands[i].hand << ", score: " << hands[i].score << ")" << std::endl;
-    }
-    std::cout << "--------------" << std::endl;
+    }*/
+
     std::cout << "Solution 1: " << solution1() << std::endl;
     std::cout << "Solution 2: " << solution2() << std::endl;
     return 0;
